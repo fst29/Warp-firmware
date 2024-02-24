@@ -69,7 +69,7 @@ enum _gpio_pins
 	#endif
 
 	#if (WARP_BUILD_ENABLE_FRDMKL03)
-		kWarpPinUnusedPTB0			= GPIO_MAKE_PIN(HW_GPIOB, 0),
+		kWarpPinRST				= GPIO_MAKE_PIN(HW_GPIOB, 0),
 		kWarpPinUnusedPTB1			= GPIO_MAKE_PIN(HW_GPIOB, 1),
 		kWarpPinUnusedPTB2			= GPIO_MAKE_PIN(HW_GPIOB, 2),
 		kWarpPinUnusedPTB3			= GPIO_MAKE_PIN(HW_GPIOB, 3),
@@ -81,17 +81,17 @@ enum _gpio_pins
 		kWarpPinUnusedPTB11			= GPIO_MAKE_PIN(HW_GPIOB, 11),
 		kWarpPinUnusedPTB13			= GPIO_MAKE_PIN(HW_GPIOB, 13),
 
-		kWarpPinUnusedPTA0			= GPIO_MAKE_PIN(HW_GPIOA, 0),
-		kWarpPinUnusedPTA1			= GPIO_MAKE_PIN(HW_GPIOA, 1),
-		kWarpPinUnusedPTA2			= GPIO_MAKE_PIN(HW_GPIOA, 2),
+		//kWarpPinUnusedPTA0			= GPIO_MAKE_PIN(HW_GPIOA, 0),
+		//kWarpPinUnusedPTA1			= GPIO_MAKE_PIN(HW_GPIOA, 1),
+		//kWarpPinUnusedPTA2			= GPIO_MAKE_PIN(HW_GPIOA, 2),
 		kWarpPinUnusedPTA3			= GPIO_MAKE_PIN(HW_GPIOA, 3),
 		kWarpPinUnusedPTA4			= GPIO_MAKE_PIN(HW_GPIOA, 4),
 		kWarpPinUnusedPTA5			= GPIO_MAKE_PIN(HW_GPIOA, 5),
-		kWarpPinUnusedPTA6			= GPIO_MAKE_PIN(HW_GPIOA, 6),
+		kWarpPinCSn				= GPIO_MAKE_PIN(HW_GPIOA, 6),
 		kWarpPinUnusedPTA7			= GPIO_MAKE_PIN(HW_GPIOA, 7),
 		kWarpPinUnusedPTA8			= GPIO_MAKE_PIN(HW_GPIOA, 8),
 		kWarpPinUnusedPTA9			= GPIO_MAKE_PIN(HW_GPIOA, 9),
-		kWarpPinUnusedPTA12			= GPIO_MAKE_PIN(HW_GPIOA, 12),
+		kWarpPinDC				= GPIO_MAKE_PIN(HW_GPIOA, 12),
 	#else
 		#if (WARP_BUILD_ENABLE_GLAUX_VARIANT)
 			kGlauxPinFlash_SPI_nCS		= GPIO_MAKE_PIN(HW_GPIOB, 2),

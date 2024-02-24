@@ -61,6 +61,7 @@
 #include "errstrs.h"
 #include "gpio_pins.h"
 #include "SEGGER_RTT.h"
+#include "devSSD1331.h"
 
 
 #define							kWarpConstantStringI2cFailure		"\rI2C failed, reg 0x%02x, code %d\n"
@@ -193,7 +194,7 @@ typedef enum
 	kWarpFlashRTCTPRBitField 		= 0b100,
 	kWarpFlashADXL362BitField 		= 0b1000,
 	kWarpFlashAMG8834BitField 		= 0b10000,
-	kWarpFlashMMA8541QBitField		= 0b100000,
+	kWarpFlashMMA8451QBitField		= 0b100000,
 	kWarpFlashMAG3110BitField		= 0b1000000,
 	kWarpFlashL3GD20HBitField		= 0b10000000,
 	kWarpFlashBME680BitField		= 0b100000000,
@@ -1674,7 +1675,7 @@ main(void)
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVMMA8451Q)
-		initMMA8451Q(	0x1C	/* i2cAddress */,	kWarpDefaultSupplyVoltageMillivoltsMMA8451Q	);
+		initMMA8451Q(	0x1D	/* i2cAddress */,	kWarpDefaultSupplyVoltageMillivoltsMMA8451Q	);
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVLPS25H)
@@ -2019,7 +2020,10 @@ main(void)
 		}
 	}
 #endif
-
+	
+	devSSD1331init();
+		
+	
 	while (1)
 	{
 		/*

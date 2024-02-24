@@ -24,7 +24,7 @@ enum
 {
 	kSSD1331PinMOSI		= GPIO_MAKE_PIN(HW_GPIOA, 8),
 	kSSD1331PinSCK		= GPIO_MAKE_PIN(HW_GPIOA, 9),
-	kSSD1331PinCSn		= GPIO_MAKE_PIN(HW_GPIOB, 13),
+	kSSD1331PinCSn		= GPIO_MAKE_PIN(HW_GPIOA, 6),
 	kSSD1331PinDC		= GPIO_MAKE_PIN(HW_GPIOA, 12),
 	kSSD1331PinRST		= GPIO_MAKE_PIN(HW_GPIOB, 0),
 };
@@ -77,14 +77,14 @@ devSSD1331init(void)
 	PORT_HAL_SetMuxMode(PORTA_BASE, 8u, kPortMuxAlt3);
 	PORT_HAL_SetMuxMode(PORTA_BASE, 9u, kPortMuxAlt3);
 
-	enableSPIpins();
+	warpEnableSPIpins();
 
 	/*
 	 *	Override Warp firmware's use of these pins.
 	 *
 	 *	Reconfigure to use as GPIO.
 	 */
-	PORT_HAL_SetMuxMode(PORTB_BASE, 13u, kPortMuxAsGpio);
+	PORT_HAL_SetMuxMode(PORTA_BASE, 6u, kPortMuxAsGpio);
 	PORT_HAL_SetMuxMode(PORTA_BASE, 12u, kPortMuxAsGpio);
 	PORT_HAL_SetMuxMode(PORTB_BASE, 0u, kPortMuxAsGpio);
 
@@ -131,11 +131,11 @@ devSSD1331init(void)
 	writeCommand(kSSD1331CommandVCOMH);		// 0xBE
 	writeCommand(0x3E);
 	writeCommand(kSSD1331CommandMASTERCURRENT);	// 0x87
-	writeCommand(0x06);
+	writeCommand(0x0F);
 	writeCommand(kSSD1331CommandCONTRASTA);		// 0x81
 	writeCommand(0x91);
 	writeCommand(kSSD1331CommandCONTRASTB);		// 0x82
-	writeCommand(0x50);
+	writeCommand(0xFF);
 	writeCommand(kSSD1331CommandCONTRASTC);		// 0x83
 	writeCommand(0x7D);
 	writeCommand(kSSD1331CommandDISPLAYON);		// Turn on oled panel
@@ -161,8 +161,19 @@ devSSD1331init(void)
 	 *	Any post-initialization drawing commands go here.
 	 */
 	//...
-
-
+	writeCommand(0x22); 	//Drawing rectangle
+	writeCommand(0x00); 	//Row Address of Start		(00)
+	writeCommand(0x00);	//Column Address of Start	(00)
+	writeCommand(0x5f);	//Row Address of End 		(95)
+	writeCommand(0x3f);	//Column address of End 	(63) 
+	writeCommand(0x00);	//Color C of the line		(R=00)
+	writeCommand(0x3f);	//Color B of the line		(G=63)
+	writeCommand(0x00);	//Color A of the line		(B=00)
+	writeCommand(0x00);	//Color C of the fill area	(R=00)
+	writeCommand(0x3f);	//Color B of the fill area	(G=63)
+	writeCommand(0x00);	//Color A of the fill area	(B=00)
+	
+	
 
 	return 0;
 }
